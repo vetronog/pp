@@ -26,8 +26,8 @@ void Algorithm::Start()
 	float y;
 	for (size_t i = 0; i < m_iterationsCount; ++i)
 	{
-		x = rand() / RAND_MAX * DIAMETER - CIRCLE_RADIUS;
-		y = rand() / RAND_MAX * DIAMETER - CIRCLE_RADIUS;
+		x = (float)rand() / RAND_MAX * DIAMETER - CIRCLE_RADIUS;
+		y = float)rand() / RAND_MAX * DIAMETER - CIRCLE_RADIUS;
 		if (IsPointInCircle(x,y))
 		{
 			++m_pointsInCircleCount;
