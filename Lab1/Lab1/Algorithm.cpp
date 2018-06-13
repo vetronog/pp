@@ -34,20 +34,8 @@ void Algorithm::Start()
 
 void Algorithm::SingleThreadAlgorithm()
 {
-	
-	float x;
-	float y;
-	for (size_t i = 0; i < m_iterationCount; ++i)
-	{
-		x = (float)rand() / RAND_MAX * DIAMETER - CIRCLE_RADIUS;
-		y = (float)rand() / RAND_MAX * DIAMETER - CIRCLE_RADIUS;
-		if (IsPointInCircle(x, y))
-		{
-			++m_pointsInCircleCount;
-		}
-	}
-
-	 m_pi = PI_COEFICIENT * (double)m_pointsInCircleCount / m_iterationCount;
+	CalculatePointsInCircle(&m_iterationCount);
+	m_pi = PI_COEFICIENT * (double)m_pointsInCircleCount / m_iterationCount;
 }
 
 DWORD Algorithm::CalculatePointsInCircle(LPVOID data)
@@ -64,7 +52,6 @@ DWORD Algorithm::CalculatePointsInCircle(LPVOID data)
 			InterlockedIncrement(&m_pointsInCircleCount);
 		}
 	}
-	std::printf("%d\n", m_pointsInCircleCount);
 	return 0;
 }
 
@@ -88,9 +75,6 @@ void Algorithm::MultiThreadAlgorithm()
 		controller.Add(&CalculatePointsInCircle, &iterationThreadCount[i]);
 	}
 	controller.WaitAll();
-	std::printf("%d\n", m_pointsInCircleCount);
-
-	std::printf("%d\n", m_iterationCount);
 	m_pi = PI_COEFICIENT * (double)m_pointsInCircleCount / m_iterationCount;
 }
 bool Algorithm::IsPointInCircle(float x, float y)
