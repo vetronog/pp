@@ -12,7 +12,6 @@ Mutex::Mutex()
 
 Mutex::~Mutex()
 {
-	CloseHandle(m_mutex);
 }
 
 void Mutex::Lock()
