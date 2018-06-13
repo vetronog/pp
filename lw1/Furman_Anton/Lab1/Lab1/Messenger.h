@@ -3,6 +3,8 @@ class Messenger
 {
 public:
 	Messenger();
-	~Messenger();
+	~Messenger() = default;
+	static void PrintHelpMessage();
+	static void PrintErrorMessage();
 };
 
