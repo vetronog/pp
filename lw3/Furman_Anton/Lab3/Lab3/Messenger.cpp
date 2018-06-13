@@ -1,10 +1,9 @@
 #include "stdafx.h"
 #include "Messenger.h"
 
-static const std::string ITERATION_COUNT_MESSAGE = "<iteration_count> - positive value\n";
-static const std::string ARGUMENT_MESSAGE = ITERATION_COUNT_MESSAGE +"\n";
-static const std::string HELP_MESSAGE = "Use Lab1.exe <iteration_count> <thread_count>" + ARGUMENT_MESSAGE + "/n";
-static const std::string ERROR_MESSAGE = "Invalid arguments \n" "Use Lab1.exe --h for help\n";
+static const std::string ITERATION_COUNT_MESSAGE = "<iteration_count> - positive value";
+static const std::string HELP_MESSAGE = "Use Lab1.exe <iteration_count> \n" + ITERATION_COUNT_MESSAGE;
+static const std::string ERROR_MESSAGE = "Invalid arguments \n" "Use Lab1.exe --h for help";
 
 Messenger::Messenger()
 {

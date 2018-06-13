@@ -6,10 +6,9 @@ static const size_t EXPONENT = 2;
 static const size_t CIRCLE_RADIUS = 1;
 static const size_t DIAMETER = 2 * CIRCLE_RADIUS;
 
-size_t Algorithm::m_pointsInCircleCount = 0;
-
 Algorithm::Algorithm(size_t iterCount)
-	: m_iterationCount(iterCount)
+	: m_iterationCount(iterCount),
+	  m_pointsInCircleCount(0)
 {	std::srand(time(0));
 }
 
@@ -23,15 +22,18 @@ void Algorithm::CalculatePointsInCircle()
 {
 	float x;
 	float y;
-	for (size_t i = 0; i < m_iterationCount; ++i)
+	#pragma omp parallel for 
+	for (int i = 0; i < m_iterationCount; ++i)
 	{
 		x = (float)rand() / RAND_MAX * DIAMETER - CIRCLE_RADIUS;
 		y = (float)rand() / RAND_MAX * DIAMETER - CIRCLE_RADIUS;
 		if (IsPointInCircle(x, y))
 		{
-			InterlockedIncrement(&m_pointsInCircleCount);
+			#pragma omp atomic
+			++m_pointsInCircleCount;
 		}
 	}
+	m_pi = PI_COEFICIENT * (double)m_pointsInCircleCount / m_iterationCount;
 }
 
 

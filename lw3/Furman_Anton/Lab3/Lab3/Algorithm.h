@@ -9,7 +9,7 @@ public:
 private:
 	static bool IsPointInCircle(float x, float y);
 	double m_pi;
-	static size_t m_pointsInCircleCount;
+	size_t m_pointsInCircleCount;
 	size_t m_iterationCount; 
 };
 
